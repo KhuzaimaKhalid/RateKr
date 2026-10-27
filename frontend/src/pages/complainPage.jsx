@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from '../components/navbar';
+import { API_URL } from "../config";
 
-const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api";
+
 
 const ComplainPage = () => {
   const location = useLocation();

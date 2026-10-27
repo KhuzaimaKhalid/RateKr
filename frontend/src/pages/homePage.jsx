@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/navbar'
-
+import { API_URL } from "../config";
 const outlet = {
   name: 'Burger Lab, Dolmen',
   slug: 'burger-lab-dolmen',
@@ -11,7 +11,7 @@ const outlet = {
 }
 
 const COMPLAINT_MAX_STAR = 3 
-const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000/api"
+
 
 const Home = () => {
   const navigate = useNavigate()
