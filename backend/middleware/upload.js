@@ -1,24 +1,11 @@
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
-const crypto = require("crypto");
 
-const dir = path.join(__dirname, "..", "uploads", "logos");
-fs.mkdirSync(dir, { recursive: true });
-
-const extensions = {
-  "image/png": ".png",
-  "image/jpeg": ".jpg",
-  "image/webp": ".webp",
-};
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, dir),
-  filename: (req, file, cb) => cb(null, `${crypto.randomUUID()}${extensions[file.mimetype]}`),
-});
+// Keep file in memory buffer instead of writing to disk
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
-  if (extensions[file.mimetype]) return cb(null, true);
+  const allowed = ["image/png", "image/jpeg", "image/webp"];
+  if (allowed.includes(file.mimetype)) return cb(null, true);
   cb(new Error("Only PNG, JPG or WEBP images are allowed"));
 };
 
