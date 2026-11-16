@@ -41,7 +41,7 @@ const createRating = async (req, res) => {
     }
     res.status(201).json({ ok: true });
   } catch (error) {
-    console.log("catch block"+req.body)
+    console.log("catch block"+req.body+error.message)
     console.log()
     res.status(500).json({ message: error.message });
   }
