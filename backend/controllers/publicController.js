@@ -33,12 +33,16 @@ const createRating = async (req, res) => {
     await Rating.create({ outletId: outlet._id, rating });
 
     if (rating <= COMPLAINT_MAX_STAR) {
-      console.log("sending email")
-      sendMail(
-        outlet.managerEmails,
-        `${rating}-star rating at ${outlet.name}`,
-        `A customer just gave ${rating} stars at ${outlet.name}. They are filling in the complaint form now, and you will get a second email with details.`
-      );
+      try {
+        await sendMail(
+          outlet.managerEmails,
+          `${rating}-star rating at ${outlet.name}`,
+          `A customer just gave ${rating} stars at ${outlet.name}. ...`
+        );
+        console.log("email sent");
+      } catch (e) {
+        console.error("email failed:", e.message);
+      }
     }
     console.log("email sent")
     res.status(201).json({ ok: true });
