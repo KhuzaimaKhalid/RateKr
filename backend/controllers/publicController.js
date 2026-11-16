@@ -20,6 +20,7 @@ const getOutlet = async (req, res) => {
 
 const createRating = async (req, res) => {
   try {
+    console.log(req.body)
     const outletSlug = String(req.body.outletSlug || "");
     const rating = Number(req.body.rating);
     if (!Number.isInteger(rating) || rating < 1 || rating > 5)
