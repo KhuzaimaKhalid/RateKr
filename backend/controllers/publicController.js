@@ -21,7 +21,7 @@ const getOutlet = async (req, res) => {
 const createRating = async (req, res) => {
   console.log("try block"+req.body)
   try {
-    console.log(req.body)
+    console.log("inside try" +req.body)
     const outletSlug = String(req.body.outletSlug || "");
     const rating = Number(req.body.rating);
     if (!Number.isInteger(rating) || rating < 1 || rating > 5)
@@ -33,12 +33,14 @@ const createRating = async (req, res) => {
     await Rating.create({ outletId: outlet._id, rating });
 
     if (rating <= COMPLAINT_MAX_STAR) {
+      console.log("sending email")
       sendMail(
         outlet.managerEmails,
         `${rating}-star rating at ${outlet.name}`,
         `A customer just gave ${rating} stars at ${outlet.name}. They are filling in the complaint form now, and you will get a second email with details.`
       );
     }
+    console.log("email sent")
     res.status(201).json({ ok: true });
   } catch (error) {
     console.log("catch block"+req.body+error.message)
