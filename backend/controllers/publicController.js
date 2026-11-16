@@ -19,6 +19,7 @@ const getOutlet = async (req, res) => {
 };
 
 const createRating = async (req, res) => {
+  console.log("try block"+req.body)
   try {
     console.log(req.body)
     const outletSlug = String(req.body.outletSlug || "");
@@ -40,6 +41,8 @@ const createRating = async (req, res) => {
     }
     res.status(201).json({ ok: true });
   } catch (error) {
+    console.log("catch block"+req.body)
+    console.log()
     res.status(500).json({ message: error.message });
   }
 };

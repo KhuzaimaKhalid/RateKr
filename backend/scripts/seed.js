@@ -2,8 +2,8 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const Outlet = require("./models/Outlet");
-const User = require("./models/User");
+const Outlet = require("../models/Outlet");
+const User = require("../models/User");
 
 (async () => {
   try {
